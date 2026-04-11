@@ -1,104 +1,130 @@
-# Stage265: Public Verification URL
-
-MIT License Copyright (c) 2025 Motohiro Suzuki
-
----
+# Stage266: Verified Public Evidence
 
 ## Overview
 
-Stage265 introduces a **public verification URL** using GitHub Pages.
+Stage266 introduces **Verified Public Evidence**.
 
-This stage extends Stage264 by enabling:
+This stage enables:
 
-* browser-based verification
-* URL-only access (no local setup required for basic checks)
-* public inspection of evidence artifacts
-* alignment with external verification expectations (OpenSSF / supply chain transparency)
+- Public verification via URL
+- Browser-based verification of manifest / receipt / OTS proof
+- OpenTimestamps status visibility (pending / confirmed)
+- Deterministic verification status published as JSON
+- Visual verification state display via GitHub Pages
 
----
+This transforms:
 
-## Core Idea
-
-Stage264 proved:
-
-* deterministic artifact generation
-* OpenTimestamps anchoring (Bitcoin-backed)
-* verifiable release manifest
-
-Stage265 proves:
-
-👉 **Anyone can verify the evidence via a URL**
+- "Evidence exists" → "Evidence status is publicly verifiable"
 
 ---
 
-## Public Verification
+## Public Verification URL
 
-### Main URL
+👉 https://mokkunsuzuki-code.github.io/stage266/
 
-https://mokkunsuzuki-code.github.io/stage265/
+Anyone can open this URL and verify:
 
-### Verification Page
-
-https://mokkunsuzuki-code.github.io/stage265/verify.html
-
----
-
-## What Can Be Verified
-
-The verification page performs:
-
-* Manifest SHA-256 integrity check
-* Source bundle SHA-256 verification
-* GitHub Actions execution linkage verification
-* Evidence file presence validation
-* OpenTimestamps proof presence confirmation
-
----
-
-## Evidence Structure
-
-```
-release_manifest.json
-release_manifest.json.sha256
-release_manifest.json.ots
-github_actions_receipt.json
-stage265-source-bundle.tar.gz
-```
+- Manifest file
+- Receipt
+- OpenTimestamps proof
+- Current verification status
 
 ---
 
 ## What This Stage Proves
 
-* Evidence is publicly accessible
-* Verification is reproducible without local environment
-* Evidence is cryptographically consistent
-* CI execution is externally inspectable
-* Timestamp proof is anchored to Bitcoin (via OpenTimestamps)
+- Evidence is publicly accessible via URL
+- Verification inputs are reproducible
+- OpenTimestamps proof is verifiable
+- Verification status is machine-readable (JSON)
+- Verification state is human-readable (UI)
+
+---
+
+## OpenTimestamps Status
+
+The page shows:
+
+- pending → waiting for Bitcoin confirmation
+- confirmed → anchored in Bitcoin block
+
+When confirmed, it will include:
+
+- block height
+- timestamp (UTC)
+
+---
+
+## Architecture
+
+### CI (GitHub Actions)
+
+- Generate release manifest
+- Generate receipt
+- Stamp with OpenTimestamps
+- Upgrade OTS proof
+- Verify OTS status
+- Generate `verification_status.json`
+
+### GitHub Pages
+
+- Reads `verification_status.json`
+- Displays verification state
+- Provides public artifact URLs
+
+---
+
+## Key Files
+
+
+out/release/
+├── release_manifest.json
+├── release_manifest.json.ots
+├── github_actions_receipt.json
+
+docs/
+├── index.html
+└── status/verification_status.json
+
+
+---
+
+## Verification Model
+
+This stage separates:
+
+- Evidence generation (CI)
+- Evidence verification (OTS)
+- Evidence presentation (Pages)
+
+This ensures:
+
+- reproducibility
+- transparency
+- public verifiability
 
 ---
 
 ## Important Notes
 
-* Browser verification confirms integrity and linkage
-* Final OpenTimestamps verification still requires:
-
-```
-ots upgrade release_manifest.json.ots
-ots verify release_manifest.json.ots
-```
-
-* This stage does NOT claim full trustlessness, but enables independent verification
+- "pending" is expected immediately after stamping
+- confirmation occurs when Bitcoin anchor is finalized
+- verification does not rely on trust in this repository
+- anyone can independently verify the proof
 
 ---
 
-## Positioning
+## Evolution
 
-Stage265 represents:
+Stage265:
+→ Public verification URL
 
-👉 **"From verifiable evidence → publicly accessible verification"**
+Stage266:
+→ Verification status visibility (this stage)
 
 ---
 
 ## License
 
 MIT License
+
