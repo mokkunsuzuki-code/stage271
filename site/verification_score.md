@@ -1,6 +1,6 @@
-# Stage269 Verification Score
+# Stage270 Verification Score
 
-Stage269 reuses the deterministic trust score from Stage268.
+Stage270 reuses the deterministic trust score from Stage268.
 
 **Total Trust:** `0.125`
 
@@ -18,6 +18,6 @@ Stage269 reuses the deterministic trust score from Stage268.
 ## Important Meaning
 
 - This is a reproducible trust index.
-- This score is later used by the Stage269 gate.
+- This score is later used by the Stage270 gate.
 - Time settlement may remain pending even when other dimensions are strong.
 

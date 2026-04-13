@@ -33,7 +33,7 @@ def write_outputs(payload: dict) -> None:
     OUT_SHA256.write_text(f"{digest}  gate_result.json\n", encoding="utf-8")
 
     lines = [
-        "# Stage269 Gate Result",
+        "# Stage270 Gate Result",
         "",
         f"**Decision:** `{payload['decision']}`",
         "",
@@ -103,7 +103,7 @@ def main() -> int:
         exit_code = 0
 
     payload = {
-        "stage": "stage269",
+        "stage": "stage270",
         "gate_model": {
             "immediate_gate": "integrity × execution × identity",
             "settlement_gate": "time",

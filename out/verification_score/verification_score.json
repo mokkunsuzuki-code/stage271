@@ -6,8 +6,7 @@
         "run_url_evidence_files": [],
         "successful_run_records": [],
         "workflow_files": [
-          ".github/workflows/stage269-pages.yml",
-          ".github/workflows/stage269-trust-gate.yml"
+          ".github/workflows/stage270-pages.yml"
         ]
       },
       "score": 0.5,
@@ -72,6 +71,7 @@
           "review_records/review_002.json",
           "review_records/review_003.json",
           "site/gate_result.json",
+          "site/time_settlement.json",
           "site/verification_score.json",
           "stage256/out/external_runner_bundle/stage255_bundle_manifest.json"
         ],
@@ -82,6 +82,6 @@
     }
   },
   "formula": "total_trust = time_trust * integrity_trust * execution_trust * identity_trust",
-  "stage": "stage269",
+  "stage": "stage270",
   "total_trust": 0.125
 }

@@ -131,7 +131,7 @@ When conditions are met:
 
 ## 🧭 Summary
 
-Stage269:
+Stage270:
 → evaluates trust
 
 Stage270:

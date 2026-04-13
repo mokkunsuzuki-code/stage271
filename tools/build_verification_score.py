@@ -186,8 +186,8 @@ def detect_execution_trust(root: Path) -> dict[str, Any]:
 
     workflow_dir = root / ".github" / "workflows"
     allowed_workflow_names = {
-        "stage269-trust-gate.yml",
-        "stage269-pages.yml",
+        "stage270-trust-gate.yml",
+        "stage270-pages.yml",
     }
 
     if workflow_dir.exists():
@@ -288,9 +288,9 @@ def detect_identity_trust(root: Path) -> dict[str, Any]:
 def build_summary_md(report: dict[str, Any]) -> str:
     c = report["components"]
     lines = [
-        "# Stage269 Verification Score",
+        "# Stage270 Verification Score",
         "",
-        "Stage269 reuses the deterministic trust score from Stage268.",
+        "Stage270 reuses the deterministic trust score from Stage268.",
         "",
         f"**Total Trust:** `{report['total_trust']}`",
         "",
@@ -308,7 +308,7 @@ def build_summary_md(report: dict[str, Any]) -> str:
         "## Important Meaning",
         "",
         "- This is a reproducible trust index.",
-        "- This score is later used by the Stage269 gate.",
+        "- This score is later used by the Stage270 gate.",
         "- Time settlement may remain pending even when other dimensions are strong.",
         "",
     ]
@@ -331,7 +331,7 @@ def main() -> int:
     )
 
     report = {
-        "stage": "stage269",
+        "stage": "stage270",
         "formula": "total_trust = time_trust * integrity_trust * execution_trust * identity_trust",
         "components": {
             "time_trust": time_trust,
