@@ -1,0 +1,53 @@
+name: stage269-trust-gate
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  trust-gate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Build verification score
+        run: python3 tools/build_verification_score.py
+
+      - name: Verify verification score
+        run: python3 tools/verify_verification_score.py
+
+      - name: Run VEP gate
+        run: python3 tools/verification_gate.py
+
+      - name: Verify gate result
+        run: python3 tools/verify_gate_result.py
+
+      - name: Copy public files
+        run: |
+          cp out/verification_score/verification_score.json site/
+          cp out/verification_score/verification_score.md site/
+          cp out/vep_status/gate_result.json site/
+          cp out/vep_status/gate_result.md site/
+
+      - name: Upload gate artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: stage269-trust-gate
+          path: |
+            out/verification_score/verification_score.json
+            out/verification_score/verification_score.json.sha256
+            out/verification_score/verification_score.md
+            out/vep_status/gate_result.json
+            out/vep_status/gate_result.json.sha256
+            out/vep_status/gate_result.md

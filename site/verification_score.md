@@ -1,19 +1,14 @@
-# Stage268 Verification Score
+# Stage269 Verification Score
 
-Stage268 computes a deterministic trust score from four dimensions:
+Stage269 reuses the deterministic trust score from Stage268.
 
-- Time Trust
-- Integrity Trust
-- Execution Trust
-- Identity Trust
-
-**Total Trust:** `0.25`
+**Total Trust:** `0.125`
 
 ## Component Scores
 
 - **Time Trust:** `0.25`  (bitcoin-evidence-found-but-confirmations-not-parsed)
 - **Integrity Trust:** `1.0`  (sha256:yes, ots:yes)
-- **Execution Trust:** `1.0`  (workflows:yes, ci_evidence:yes)
+- **Execution Trust:** `0.5`  (workflows:yes, ci_evidence:no)
 - **Identity Trust:** `1.0`  (signatures:yes, public_keys:yes, multi_signer:yes)
 
 ## Formula
@@ -22,7 +17,7 @@ Stage268 computes a deterministic trust score from four dimensions:
 
 ## Important Meaning
 
-- This is **not** a claim of absolute security.
-- This is a **reproducible trust index** based on detected evidence.
-- If one component is weak, Total Trust drops multiplicatively.
+- This is a reproducible trust index.
+- This score is later used by the Stage269 gate.
+- Time settlement may remain pending even when other dimensions are strong.
 

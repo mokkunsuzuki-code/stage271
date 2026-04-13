@@ -11,7 +11,6 @@ OUT_DIR = ROOT / "out" / "verification_score"
 OUT_JSON = OUT_DIR / "verification_score.json"
 OUT_MD = OUT_DIR / "verification_score.md"
 
-
 EXCLUDE_DIRS = {
     ".git",
     ".venv",
@@ -20,6 +19,18 @@ EXCLUDE_DIRS = {
     ".pytest_cache",
     "node_modules",
 }
+
+EXCLUDE_PATH_KEYWORDS = {
+    "downloaded_stage",
+    "out/extracted_",
+}
+
+
+def should_skip(path: Path) -> bool:
+    rel = str(path)
+    if any(part in EXCLUDE_DIRS for part in path.parts):
+        return True
+    return any(keyword in rel for keyword in EXCLUDE_PATH_KEYWORDS)
 
 
 def sha256_file(path: Path) -> str:
@@ -32,7 +43,7 @@ def sha256_file(path: Path) -> str:
 
 def iter_files(root: Path):
     for path in root.rglob("*"):
-        if any(part in EXCLUDE_DIRS for part in path.parts):
+        if should_skip(path):
             continue
         if path.is_file():
             yield path
@@ -173,11 +184,17 @@ def detect_execution_trust(root: Path) -> dict[str, Any]:
     run_urls = []
 
     workflow_dir = root / ".github" / "workflows"
+    allowed_workflow_names = {
+        "stage268-verification-score.yml",
+        "stage268-pages.yml",
+        "stage269-trust-gate.yml",
+        "stage269-pages.yml",
+    }
+
     if workflow_dir.exists():
-        for p in workflow_dir.glob("*.yml"):
-            workflow_files.append(str(p.relative_to(root)))
-        for p in workflow_dir.glob("*.yaml"):
-            workflow_files.append(str(p.relative_to(root)))
+        for p in workflow_dir.iterdir():
+            if p.is_file() and p.name in allowed_workflow_names:
+                workflow_files.append(str(p.relative_to(root)))
 
     for p in iter_files(root):
         if p.name == "actions_runs.json":
@@ -262,14 +279,9 @@ def detect_identity_trust(root: Path) -> dict[str, Any]:
 def build_summary_md(report: dict[str, Any]) -> str:
     c = report["components"]
     lines = [
-        "# Stage268 Verification Score",
+        "# Stage269 Verification Score",
         "",
-        "Stage268 computes a deterministic trust score from four dimensions:",
-        "",
-        "- Time Trust",
-        "- Integrity Trust",
-        "- Execution Trust",
-        "- Identity Trust",
+        "Stage269 reuses the deterministic trust score from Stage268.",
         "",
         f"**Total Trust:** `{report['total_trust']}`",
         "",
@@ -286,9 +298,9 @@ def build_summary_md(report: dict[str, Any]) -> str:
         "",
         "## Important Meaning",
         "",
-        "- This is **not** a claim of absolute security.",
-        "- This is a **reproducible trust index** based on detected evidence.",
-        "- If one component is weak, Total Trust drops multiplicatively.",
+        "- This is a reproducible trust index.",
+        "- This score is later used by the Stage269 gate.",
+        "- Time settlement may remain pending even when other dimensions are strong.",
         "",
     ]
     return "\n".join(lines) + "\n"
@@ -310,7 +322,7 @@ def main() -> int:
     )
 
     report = {
-        "stage": "stage268",
+        "stage": "stage269",
         "formula": "total_trust = time_trust * integrity_trust * execution_trust * identity_trust",
         "components": {
             "time_trust": time_trust,

@@ -2,15 +2,19 @@
   "components": {
     "execution_trust": {
       "details": {
-        "run_url_evidence_files": [],
+        "run_url_evidence_files": [
+          "downloaded_stage249_anchor/github_anchor_receipt.json",
+          "downloaded_stage250_release_anchor/github_release_anchor_receipt.json"
+        ],
         "successful_run_records": [],
         "workflow_files": [
-          ".github/workflows/stage269-pages.yml",
-          ".github/workflows/stage269-trust-gate.yml"
+          ".github/workflows/stage265-pages.yml",
+          ".github/workflows/stage267-verification-trust-level.yml",
+          ".github/workflows/stage268-verification-score.yml"
         ]
       },
-      "score": 0.5,
-      "status": "workflows:yes, ci_evidence:no"
+      "score": 1.0,
+      "status": "workflows:yes, ci_evidence:yes"
     },
     "identity_trust": {
       "details": {
@@ -18,12 +22,15 @@
           "external_signatures/config.yaml"
         ],
         "public_key_files": [
+          "downloaded_stage253_session_anchor/keys/checkpoint_witness_public.pem",
+          "downloaded_stage253_session_anchor/keys/local_witness_public.pem",
           "gpg_pubkeys/stage234_maintainer_public.asc",
           "gpg_pubkeys/stage235_github_public.asc",
           "keys/new_public.pem"
         ],
         "signature_files": [
           "artifacts/qsp-stage236.tar.gz.asc",
+          "downloaded_stage250_release_anchor/release_manifest.json.asc",
           "examples/evidence/summary.sig",
           "gpg_pubkeys/stage234_maintainer_public.asc",
           "gpg_pubkeys/stage235_github_public.asc",
@@ -36,18 +43,18 @@
     "integrity_trust": {
       "details": {
         "ots_files": [
-          "out/release/release_manifest.json.ots"
+          "downloaded_stage250_release_anchor/release_manifest.json.ots"
         ],
         "sha256_files": [
           "artifacts/qsp-stage236.sha256",
           "dist/stage237_source_bundle.tar.gz.sha256",
+          "downloaded_stage249_anchor/anchor_request.sha256",
+          "downloaded_stage249_anchor/github_anchor_receipt.sha256",
+          "downloaded_stage250_release_anchor/github_release_anchor_receipt.sha256",
+          "downloaded_stage250_release_anchor/release_manifest.sha256",
           "evidence_bundle/evidence_bundle.sha256",
           "evidence_bundle/sha256sums.txt",
           "examples/evidence/summary.sha256.txt",
-          "out/release/release_manifest.json.sha256",
-          "out/verification_score/verification_score.json.sha256",
-          "stage256/out/external_execution_record/review_log.json.sha256",
-          "stage256/out/external_runner_bundle/stage255_external_runner.tar.gz.sha256",
           "tools/write_bundle_sha256.py"
         ]
       },
@@ -56,23 +63,14 @@
     },
     "time_trust": {
       "details": {
-        "bitcoin_related_files": [
-          "out/release/release_manifest.json",
-          "out/verification_score/verification_score.json",
-          "package.json",
-          "review_records/review_001.json",
-          "review_records/review_002.json",
-          "review_records/review_003.json",
-          "site/verification_score.json",
-          "stage256/out/external_runner_bundle/stage255_bundle_manifest.json"
-        ],
+        "bitcoin_related_files": [],
         "max_confirmations": 0.0
       },
-      "score": 0.25,
-      "status": "bitcoin-evidence-found-but-confirmations-not-parsed"
+      "score": 0.0,
+      "status": "no-bitcoin-evidence-detected"
     }
   },
   "formula": "total_trust = time_trust * integrity_trust * execution_trust * identity_trust",
-  "stage": "stage269",
-  "total_trust": 0.125
+  "stage": "stage268",
+  "total_trust": 0.0
 }
