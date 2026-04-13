@@ -22,6 +22,35 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v5
 
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Build verification score
+        run: python3 tools/build_verification_score.py
+
+      - name: Verify verification score
+        run: python3 tools/verify_verification_score.py
+
+      - name: Run VEP gate
+        run: python3 tools/verification_gate.py
+
+      - name: Verify gate result
+        run: python3 tools/verify_gate_result.py
+
+      - name: Prepare published files
+        run: |
+          cp out/verification_score/verification_score.json site/
+          cp out/verification_score/verification_score.json.sha256 site/
+          cp out/verification_score/verification_score.md site/
+          if [ -f out/verification_score/verification_score.json.ots ]; then
+            cp out/verification_score/verification_score.json.ots site/
+          fi
+          cp out/vep_status/gate_result.json site/
+          cp out/vep_status/gate_result.json.sha256 site/
+          cp out/vep_status/gate_result.md site/
+
       - name: Configure Pages
         uses: actions/configure-pages@v5
 
