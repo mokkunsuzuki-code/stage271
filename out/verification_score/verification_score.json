@@ -50,6 +50,8 @@
           "out/release/release_manifest.json.sha256",
           "out/vep_status/gate_result.json.sha256",
           "out/verification_score/verification_score.json.sha256",
+          "site/gate_result.json.sha256",
+          "site/verification_score.json.sha256",
           "stage256/out/external_execution_record/review_log.json.sha256",
           "stage256/out/external_runner_bundle/stage255_external_runner.tar.gz.sha256",
           "tools/write_bundle_sha256.py"
