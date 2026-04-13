@@ -1,172 +1,150 @@
-# QSP / Stage269 – VEP Gate (Trust Decision Layer)
+# QSP / Stage270
+## Time-Settled Trust Promotion (Automatic Pending → Accept)
 
-## Overview
+Stage270 introduces **automatic time-based trust promotion**.
 
-Stage269 introduces the **Verification Execution Policy (VEP) Gate**.
+This stage upgrades the system from:
 
-This stage transforms the system from:
+- manual verification
+- static trust evaluation
 
-- "measuring trust" (Stage268)
+to:
 
-into:
-
-- **"deciding whether something is allowed to be released"**
-
----
-
-## Core Concept
-
-The system evaluates trust across four dimensions:
-
-- Time Trust (Bitcoin confirmations)
-- Integrity Trust (SHA256 / OTS)
-- Execution Trust (CI / GitHub Actions)
-- Identity Trust (Signatures / Multi-signer)
-
-And applies a decision model:
-
-
-Total Trust = Time × Integrity × Execution × Identity
-
+- **continuous verification**
+- **time-aware trust evolution**
 
 ---
 
-## VEP Gate Model
+## 🎯 What This Stage Does
 
-Stage269 introduces a **two-layer gate**:
+Stage270 continuously monitors Bitcoin-based timestamp proofs (OpenTimestamps) and:
 
-### Immediate Gate
-
-
-Integrity × Execution × Identity
-
-
-- If any of these fail → `reject`
-- System stops (fail-closed)
-
-### Settlement Gate
+1. upgrades timestamp proofs
+2. detects Bitcoin confirmations
+3. recalculates trust score
+4. re-evaluates VEP gate
+5. automatically promotes:
 
 
-Time (Bitcoin)
+pending → accept
 
 
-- Not yet confirmed → `pending`
-- Fully confirmed → `accept`
+when time settlement is complete.
 
 ---
 
-## Decision States
-
-The gate outputs three states:
-
-### 1. ACCEPT
-- All conditions satisfied
-- Safe to release
-
-### 2. PENDING
-- Technically valid
-- Waiting for time-based confirmation (Bitcoin)
-
-### 3. REJECT
-- Trust conditions not satisfied
-- Release is blocked (fail-closed)
-
----
-
-## Example (Current State)
+## 🔁 Trust Evolution Model
 
 
-Decision: PENDING
-Immediate Score: 1.0
-Total Trust: 0.25
+Initial:
+pending (time not settled)
 
-Reason:
-Time settlement pending (Bitcoin confirmations not yet complete)
+↓
 
+Bitcoin confirmations detected
 
-This means:
+↓
 
-- Integrity ✅
-- Execution ✅
-- Identity ✅
-- Time ⏳ (waiting)
+Automatic re-evaluation (cron)
 
----
+↓
 
-## Key Insight
-
-QSP and VEP together create a unique model:
-
-- QSP → **fail-closed execution**
-- VEP → **fail-closed release decision**
-
-### In one sentence:
-
-> "QSP stops broken systems. VEP stops untrusted outputs."
-
----
-
-## What This Stage Achieves
-
-- Deterministic trust evaluation
-- Reproducible decision logic
-- Transparent failure reasons
-- Public verifiability via GitHub Pages
-
----
-
-## Public Verification
-
-Verification page:
-
-https://mokkunsuzuki-code.github.io/stage269/
-
-Direct data:
-
-- gate_result.json
-- verification_score.json
-- OTS proof
-
----
-
-## Why This Matters
-
-Traditional systems:
-
-
-Build → Release → Discover problems later
-
-
-QSP + VEP:
-
-
-Build → Verify → Reject if unsafe → Never released
+accept (fully verified)
 
 
 ---
 
-## Important Clarification
+## 🧠 Key Concept
 
-`reject` does NOT mean:
+### Trust is not static.
 
-- "attacked"
-- "compromised"
+In Stage270:
 
-It means:
-
-> "Trust conditions are not satisfied."
-
----
-
-## Next Stage
-
-Stage270 will introduce:
-
-- Bitcoin confirmation parsing
-- Automatic transition from `pending` → `accept`
+- trust **changes over time**
+- trust becomes **stronger with confirmation depth**
+- trust transitions are **recorded as verifiable events**
 
 ---
 
-## License
+## ⚙️ System Architecture
+
+### VEP Gate
+
+- Immediate Gate:
+  - Integrity (SHA256 / OTS)
+  - Execution (CI / GitHub Actions)
+  - Identity (signatures / multi-signer)
+
+- Settlement Gate:
+  - Time (Bitcoin confirmations)
+
+---
+
+### Decision States
+
+| State   | Meaning                         |
+|--------|---------------------------------|
+| reject | unsafe → fail-closed            |
+| pending| valid but not yet confirmed     |
+| accept | fully verified (time-settled)   |
+
+---
+
+## 🔄 Automation
+
+Stage270 runs periodically:
+
+
+schedule:
+
+cron: "*/30 * * * *"
+
+Every 30 minutes:
+
+- checks OTS proof
+- extracts confirmations
+- updates trust score
+- re-runs gate
+
+---
+
+## 📢 Accept Notification
+
+When conditions are met:
+
+- `accept_notification.json` is generated
+- `accept_notification.md` is generated
+- GitHub Actions summary shows ACCEPT
+
+👉 This creates a **verifiable record of trust finalization**
+
+---
+
+## 🔐 What This Stage Proves
+
+- Trust can evolve deterministically
+- Time-based verification can be automated
+- Bitcoin confirmations can act as a settlement layer
+- Final trust state is reproducible and externally verifiable
+
+---
+
+## 🧭 Summary
+
+Stage269:
+→ evaluates trust
+
+Stage270:
+→ **finalizes trust over time**
+
+---
+
+## 🚀 One-line Summary
+
+**Trust is no longer decided — it is confirmed over time.**
+
+---
+
+## 📄 License
 
 MIT License (2025)
