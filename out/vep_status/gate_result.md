@@ -1,16 +1,16 @@
 # Stage270 Gate Result
 
-**Decision:** `reject`
+**Decision:** `accept`
 
-**Reason:** Execution failure: CI/workflow evidence is incomplete.
+**Reason:** All gate conditions satisfied including settled time trust.
 
 ## Scores
 
 - Time Trust: `1.0`
 - Integrity Trust: `1.0`
-- Execution Trust: `0.5`
+- Execution Trust: `1.0`
 - Identity Trust: `1.0`
-- Total Trust: `0.5`
+- Total Trust: `1.0`
 
 ## Gate Meaning
 

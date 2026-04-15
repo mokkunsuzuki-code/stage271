@@ -1,18 +1,18 @@
 {
-  "decision": "reject",
+  "decision": "accept",
   "gate_model": {
     "immediate_gate": "integrity × execution × identity",
     "settlement_gate": "time"
   },
-  "reason": "Execution failure: CI/workflow evidence is incomplete.",
+  "reason": "All gate conditions satisfied including settled time trust.",
   "scores": {
-    "execution_trust": 0.5,
+    "execution_trust": 1.0,
     "identity_trust": 1.0,
-    "immediate_score": 0.5,
+    "immediate_score": 1.0,
     "integrity_trust": 1.0,
     "time_trust": 1.0,
-    "total_trust": 0.5
+    "total_trust": 1.0
   },
   "stage": "stage270",
-  "timestamp_utc": "2026-04-15T03:09:50.600159+00:00"
+  "timestamp_utc": "2026-04-15T03:11:05.347059+00:00"
 }

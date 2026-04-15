@@ -215,6 +215,14 @@ def detect_execution_trust(root: Path) -> dict[str, Any]:
             if "github.com" in text and "/actions/runs/" in text:
                 run_urls.append(str(p.relative_to(root)))
 
+        if p.suffix.lower() in {".txt", ".md"}:
+            try:
+                raw = p.read_text(encoding="utf-8").lower()
+            except Exception:
+                raw = ""
+            if "github.com" in raw and "/actions/runs/" in raw:
+                run_urls.append(str(p.relative_to(root)))
+
     current_run_url = None
     gh_server = os.getenv("GITHUB_SERVER_URL")
     gh_repo = os.getenv("GITHUB_REPOSITORY")

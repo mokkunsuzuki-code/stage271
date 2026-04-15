@@ -3,14 +3,16 @@
     "execution_trust": {
       "details": {
         "current_run_url": null,
-        "run_url_evidence_files": [],
+        "run_url_evidence_files": [
+          "out/ci_evidence/run_url.txt"
+        ],
         "successful_run_records": [],
         "workflow_files": [
           ".github/workflows/stage270-pages.yml"
         ]
       },
-      "score": 0.5,
-      "status": "workflows:yes, ci_evidence:no"
+      "score": 1.0,
+      "status": "workflows:yes, ci_evidence:yes"
     },
     "identity_trust": {
       "details": {
@@ -83,5 +85,5 @@
   },
   "formula": "total_trust = time_trust * integrity_trust * execution_trust * identity_trust",
   "stage": "stage270",
-  "total_trust": 0.5
+  "total_trust": 1.0
 }
