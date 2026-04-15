@@ -26,18 +26,11 @@ jobs:
           python -m pip install --upgrade pip
           pip install cryptography
 
-
-      - name: Create initial external review record
+      - name: Ensure public key and signed reviews exist
         run: |
-          python tools/create_stage271_review_record.py \
-            --reviewer-id self-demo-reviewer \
-            --result comment \
-            --comment "Stage271 bootstrap record linked to Stage270 verification artifact."
-
-      - name: Sign review record
-        run: |
-          latest_review=$(ls review_records/*.json | sort | tail -n 1)
-          python tools/sign_stage271_review.py --review "$latest_review"
+          test -f keys/ed25519_public.pem
+          ls review_records/*.json
+          ls review_records/*.sig
 
       - name: Verify review chain
         run: |
