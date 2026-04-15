@@ -5,7 +5,7 @@
   },
   "previous_review_sha256": "GENESIS",
   "review_comment": "Stage271 bootstrap record linked to Stage270 verification artifact.",
-  "review_id": "ef456eb29c3627e1",
+  "review_id": "5c1d06768028df16",
   "review_result": "comment",
   "reviewer": {
     "contact": "pending",
@@ -15,6 +15,6 @@
   },
   "stage": "stage271",
   "target_artifact": "out/verification_score/verification_score.json",
-  "timestamp_utc": "2026-04-15T03:34:00Z",
+  "timestamp_utc": "2026-04-15T03:36:41Z",
   "version": "1"
 }
