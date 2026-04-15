@@ -75,13 +75,13 @@
           "site/verification_score.json",
           "stage256/out/external_runner_bundle/stage255_bundle_manifest.json"
         ],
-        "max_confirmations": 0.0
+        "max_confirmations": 6.0
       },
-      "score": 0.25,
-      "status": "bitcoin-evidence-found-but-confirmations-not-parsed"
+      "score": 1.0,
+      "status": "measured"
     }
   },
   "formula": "total_trust = time_trust * integrity_trust * execution_trust * identity_trust",
   "stage": "stage270",
-  "total_trust": 0.125
+  "total_trust": 0.5
 }

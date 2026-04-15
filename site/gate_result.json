@@ -10,9 +10,9 @@
     "identity_trust": 1.0,
     "immediate_score": 0.5,
     "integrity_trust": 1.0,
-    "time_trust": 0.25,
-    "total_trust": 0.125
+    "time_trust": 1.0,
+    "total_trust": 0.5
   },
   "stage": "stage270",
-  "timestamp_utc": "2026-04-13T09:50:16.468633+00:00"
+  "timestamp_utc": "2026-04-15T03:07:10.257131+00:00"
 }

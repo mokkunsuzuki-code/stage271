@@ -2,11 +2,11 @@
 
 Stage270 reuses the deterministic trust score from Stage268.
 
-**Total Trust:** `0.125`
+**Total Trust:** `0.5`
 
 ## Component Scores
 
-- **Time Trust:** `0.25`  (bitcoin-evidence-found-but-confirmations-not-parsed)
+- **Time Trust:** `1.0`  (measured)
 - **Integrity Trust:** `1.0`  (sha256:yes, ots:yes)
 - **Execution Trust:** `0.5`  (workflows:yes, ci_evidence:no)
 - **Identity Trust:** `1.0`  (signatures:yes, public_keys:yes, multi_signer:yes)

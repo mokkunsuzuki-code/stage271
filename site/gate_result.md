@@ -6,11 +6,11 @@
 
 ## Scores
 
-- Time Trust: `0.25`
+- Time Trust: `1.0`
 - Integrity Trust: `1.0`
 - Execution Trust: `0.5`
 - Identity Trust: `1.0`
-- Total Trust: `0.125`
+- Total Trust: `0.5`
 
 ## Gate Meaning
 
